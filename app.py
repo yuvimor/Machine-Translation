@@ -13,7 +13,6 @@ with st.sidebar:
 
 text = st.text_area(
     "Enter Text:",
-    default="Bonjour, le monde!",
     height=None,
     max_chars=None,
     key="text_area",
