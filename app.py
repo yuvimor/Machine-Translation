@@ -26,7 +26,7 @@ if language == "French to English":
   fr_en_batch = fr_en_tokenizer.prepare_seq2seq_batch(src_texts=[text])
 
   # Convert the fr_en_batch variable to a tensor
-  fr_en_batch = torch.as_tensor(fr_en_batch)
+  fr_en_batch = torch.as_tensor(fr_en_batch, dtype=torch.long, device='cpu')
 
   if st.button('Translate to English', key="translate_to_english"):
     fr_en_gen = fr_en_model.generate(**fr_en_batch)
@@ -41,7 +41,7 @@ else:
   en_fr_batch = en_fr_tokenizer.prepare_seq2seq_batch(src_texts=[text])
 
   # Convert the en_fr_batch variable to a tensor
-  en_fr_batch = torch.as_tensor(en_fr_batch)
+  en_fr_batch = torch.as_tensor(en_fr_batch, dtype=torch.long, device='cpu')
 
   if st.button('Translate to French', key="translate_to_french"):
     en_fr_gen = en_fr_model.generate(**en_fr_batch)
