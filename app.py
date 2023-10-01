@@ -6,6 +6,10 @@ model = AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 
 # Define a function to translate a French sentence into English
 def translate(sentence):
+
+  # Convert the French sentence to a tensor
+  sentence_tensor = torch.tensor(sentence)
+  
   translated_sentence = model.generate(input_ids=sentence, max_length=128)
   return translated_sentence[0]
 
