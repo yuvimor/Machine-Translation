@@ -23,8 +23,12 @@ if language == "French to English":
   fr_en_model = MarianMTModel.from_pretrained(fr_en_translation_model_name)
   fr_en_tokenizer = MarianTokenizer.from_pretrained(fr_en_translation_model_name)
 
+  fr_en_batch = fr_en_tokenizer.prepare_seq2seq_batch(src_texts=[text])
+
+  # Convert the fr_en_batch variable to a tensor
+  fr_en_batch = torch.as_tensor(fr_en_batch)
+
   if st.button('Translate to English', key="translate_to_english"):
-    fr_en_batch = fr_en_tokenizer.prepare_seq2seq_batch(src_texts=[text])
     fr_en_gen = fr_en_model.generate(**fr_en_batch)
     fr_en_translation = fr_en_tokenizer.batch_decode(fr_en_gen, skip_special_tokens=True)
     st.markdown(f"**English translation:** {fr_en_translation[0]}")
@@ -34,8 +38,12 @@ else:
   en_fr_model = MarianMTModel.from_pretrained(en_fr_translation_model_name)
   en_fr_tokenizer = MarianTokenizer.from_pretrained(en_fr_translation_model_name)
 
+  en_fr_batch = en_fr_tokenizer.prepare_seq2seq_batch(src_texts=[text])
+
+  # Convert the en_fr_batch variable to a tensor
+  en_fr_batch = torch.as_tensor(en_fr_batch)
+
   if st.button('Translate to French', key="translate_to_french"):
-    en_fr_batch = en_fr_tokenizer.prepare_seq2seq_batch(src_texts=[text])
     en_fr_gen = en_fr_model.generate(**en_fr_batch)
     en_fr_translation = en_fr_tokenizer.batch_decode(en_fr_gen, skip_special_tokens=True)
     st.markdown(f"**French translation:** {en_fr_translation[0]}")
